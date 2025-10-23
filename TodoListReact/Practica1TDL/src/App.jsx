@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import FormToDo from './components/FormToDo';
+import ToDoItem from './components/ToDoItem';
+import Logo from './components/logo';
+import './App.css';
+
+// Componente principal App
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (task) => {
+    const updatedTasks = [task, ...tasks];
+    setTasks(updatedTasks);
+  };
+
+  const deleteTask = (id) => {
+    const updatedTasks = tasks.filter(task => task.id !== id);
+    setTasks(updatedTasks);
+  };
+
+  const completeTask = (id) => {
+    setTasks(tasks.map(task =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app-container">
+      <div className="todo-app-wrapper">
+        <Logo />
+        <h1 className="app-title">Mis Tareas</h1>
+        
+        <FormToDo onSubmit={addTask} />
+        
+        <div className='list-todo-container'>
+          {tasks.length === 0 ? (
+            <p className="empty-message">¡No hay tareas!</p>
+          ) : (
+            tasks.map((task) =>
+              <ToDoItem
+                key={task.id}
+                id={task.id}
+                text={task.text}
+                completed={task.completed}
+                deleteToDo={deleteTask}
+                completeToDo={completeTask}
+              />
+            )
+          )}
+        </div>
+        
+        {tasks.length > 0 && (
+          <div className="task-counter">
+            <span className="counter-text">
+              Total: {tasks.length} | Completadas: {tasks.filter(t => t.completed).length}
+            </span>
+          </div>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,42 +1,358 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ==================== RESET Y VARIABLES ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --secondary-color: #8b5cf6;
+  --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+  --success-color: #10b981;
+  --background: #0f172a;
+  --card-bg: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes logo-spin {
+/* ==================== CONTENEDOR PRINCIPAL ==================== */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== WRAPPER DE LA APP ==================== */
+.todo-app-wrapper {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 48px 40px;
+  max-width: 640px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+/* ==================== LOGO ==================== */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  animation: fadeInDown 0.6s ease-out;
+  height: fit-content;
+  width: fit-content;
+}
+
+.app-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.app-logo:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+@keyframes fadeInDown {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* ==================== TÍTULO ==================== */
+.app-title {
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==================== FORMULARIO ==================== */
+.form-todo {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.card {
-  padding: 2em;
+.input-todo {
+  flex: 1;
+  padding: 14px 20px;
+  background: var(--background);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.3s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.input-todo::placeholder {
+  color: var(--text-secondary);
+}
+
+.input-todo:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+.button-todo {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.button-todo:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button-todo:active {
+  transform: translateY(0);
+}
+
+/* ==================== LISTA DE TAREAS ==================== */
+.list-todo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Scrollbar personalizada */
+.list-todo-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list-todo-container::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 10px;
+}
+
+.list-todo-container::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+
+.list-todo-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* ==================== TAREA INDIVIDUAL ==================== */
+.todo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.todo-container:hover {
+  transform: translateX(8px);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Gradientes alternos para tareas */
+.todo-container:nth-child(3n + 1) {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), transparent);
+}
+
+.todo-container:nth-child(3n + 2) {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), transparent);
+}
+
+.todo-container:nth-child(3n + 3) {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), transparent);
+}
+
+.todo-text {
+  flex: 1;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-primary);
+  user-select: none;
+  transition: all 0.3s ease;
+  padding-right: 16px;
+  line-height: 1.5;
+}
+
+.todo-text:hover {
+  color: var(--primary-color);
+}
+
+/* Tarea completada */
+.todo-container.completed {
+  opacity: 0.6;
+  border-color: var(--success-color);
+}
+
+.todo-container.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+/* ==================== BOTÓN ELIMINAR ==================== */
+.todo-delete-btn {
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.todo-delete-btn:hover {
+  background: var(--danger-hover);
+  transform: scale(1.1) rotate(90deg);
+}
+
+.todo-delete-btn:active {
+  transform: scale(0.95);
+}
+
+/* ==================== MENSAJE VACÍO ==================== */
+.empty-message {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 48px 20px;
+  font-size: 18px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ==================== CONTADOR DE TAREAS ==================== */
+.task-counter {
+  margin-top: 24px;
+  padding: 16px;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  text-align: center;
+  animation: slideUp 0.6s ease-out;
+}
+
+.counter-text {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 640px) {
+  .todo-app-wrapper {
+    padding: 32px 24px;
+  }
+
+  .app-title {
+    font-size: 28px;
+  }
+
+  .form-todo {
+    flex-direction: column;
+  }
+
+  .button-todo {
+    width: 100%;
+  }
+
+  .app-logo {
+    width: 64px;
+    height: 64px;
+  }
 }
