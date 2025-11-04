@@ -11,9 +11,7 @@ import '../styles/FitLife.css';
 
 const RegistrationForm = () => {
   
-  // ============================================
   // REACT HOOK FORM - Inicialización
-  // ============================================
   const { 
     register,           // Función para registrar campos
     handleSubmit,       // Función para manejar envío
@@ -25,9 +23,7 @@ const RegistrationForm = () => {
     mode: 'onBlur'     // Valida cuando el usuario sale del campo
   });
 
-  // ============================================
   // ESTADO LOCAL
-  // ============================================
   const [currentStep, setCurrentStep] = useState(1); // Paso actual (1-4)
   const [loading, setLoading] = useState(false);     // Estado de carga
   const [submitStatus, setSubmitStatus] = useState(null); // Éxito/error
@@ -35,9 +31,7 @@ const RegistrationForm = () => {
   // Total de pasos del formulario
   const totalSteps = 4;
 
-  // ============================================
   // FUNCIÓN: Validar paso actual
-  // ============================================
   /**
    * Valida los campos del paso actual antes de avanzar
    * Retorna true si todo está bien, false si hay errores
@@ -65,9 +59,7 @@ const RegistrationForm = () => {
     return result;
   };
 
-  // ============================================
   // FUNCIÓN: Avanzar al siguiente paso
-  // ============================================
   const handleNext = async () => {
     // Primero validamos el paso actual
     const isValid = await validateCurrentStep();
@@ -79,9 +71,7 @@ const RegistrationForm = () => {
     }
   };
 
-  // ============================================
   // FUNCIÓN: Volver al paso anterior
-  // ============================================
   const handlePrevious = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
@@ -89,9 +79,7 @@ const RegistrationForm = () => {
     }
   };
 
-  // ============================================
   // FUNCIÓN: Enviar formulario al servidor
-  // ============================================
   /**
    * Esta función se ejecuta cuando el usuario confirma el envío
    * Hace una petición HTTP POST con todos los datos
@@ -151,7 +139,7 @@ const RegistrationForm = () => {
       // }, 3000);
 
     } catch (error) {
-      console.error('❌ Error:', error);
+      console.error('Error:', error);
       
       // Mostramos mensaje de error
       setSubmitStatus({
@@ -164,24 +152,23 @@ const RegistrationForm = () => {
     }
   };
 
-  // ============================================
+  
   // RENDERIZADO DEL COMPONENTE
-  // ============================================
+ 
   return (
     <div className="fitlife-container">
       <div className="fitlife-card">
         
-        {/* ============================================
+        {/*
             HEADER DEL FORMULARIO
-            ============================================ */}
+          */}
         <div className="fitlife-header">
-          <h1>🏋️‍♀️ FitLife Registration</h1>
+          <h1>FitLife Registration</h1>
           <p>Tu viaje hacia una vida saludable comienza aquí</p>
         </div>
 
-        {/* ============================================
-            INDICADOR DE PASOS
-            ============================================ */}
+        {/* INDICADOR DE PASOS */}
+          
         <div style={{ padding: '2rem 2rem 0 2rem' }}>
           <div className="steps-indicator">
             {[1, 2, 3, 4].map(step => (
@@ -308,7 +295,7 @@ const RegistrationForm = () => {
                   </>
                 ) : (
                   <>
-                    🚀 Confirmar Registro
+                     Confirmar Registro
                   </>
                 )}
               </button>

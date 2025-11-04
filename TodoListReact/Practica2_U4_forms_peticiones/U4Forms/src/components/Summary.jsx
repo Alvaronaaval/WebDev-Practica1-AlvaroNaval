@@ -10,9 +10,7 @@ import '../styles/FitLife.css';
  */
 const Summary = ({ data }) => {
   
-  // ============================================
   // FUNCIONES AUXILIARES PARA FORMATEAR DATOS
-  // ============================================
   
   /**
    * Formatea la fecha de YYYY-MM-DD a DD/MM/YYYY
@@ -101,9 +99,8 @@ const Summary = ({ data }) => {
         </span>
       </div>
 
-      {/* ============================================
-          SECCIÓN: Datos Personales
-          ============================================ */}
+      {/* SECCIÓN: Datos Personales */} 
+
       <div className="summary-section">
         <h3 style={{ 
           color: '#667eea', 
@@ -136,9 +133,7 @@ const Summary = ({ data }) => {
         </div>
       </div>
 
-      {/* ============================================
-          SECCIÓN: Información de Contacto
-          ============================================ */}
+      {/* SECCIÓN: Información de Contacto */}
       <div className="summary-section">
         <h3 style={{ 
           color: '#667eea', 
@@ -146,7 +141,7 @@ const Summary = ({ data }) => {
           fontSize: '1.2rem',
           fontWeight: 'bold'
         }}>
-          📞 Información de Contacto
+           Información de Contacto
         </h3>
 
         <div className="summary-item">
@@ -172,9 +167,7 @@ const Summary = ({ data }) => {
         </div>
       </div>
 
-      {/* ============================================
-          SECCIÓN: Preferencias de Entrenamiento
-          ============================================ */}
+      {/* SECCIÓN: Preferencias de Entrenamiento */}
       <div className="summary-section">
         <h3 style={{ 
           color: '#667eea', 
@@ -208,9 +201,7 @@ const Summary = ({ data }) => {
         </div>
       </div>
 
-      {/* ============================================
-          MENSAJE FINAL
-          ============================================ */}
+      {/* MENSAJE FINAL */}
       <div style={{
         backgroundColor: '#f0f9ff',
         border: '2px solid #3b82f6',
