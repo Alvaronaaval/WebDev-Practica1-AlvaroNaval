@@ -65,9 +65,9 @@ const TrainingPreferences = ({ register, errors, watch }) => {
          Preferencias de Entrenamiento
       </h2>
 
-      {/* ============================================
+      {/*
           SECCIÓN: Objetivo Principal
-          ============================================ */}
+       */}
       <div className="form-group">
         <label className="form-label required">
           ¿Cuál es tu objetivo principal?
@@ -141,10 +141,9 @@ const TrainingPreferences = ({ register, errors, watch }) => {
         )}
       </div>
 
-      {/* ============================================
-          RENDERIZADO CONDICIONAL
-          Solo muestra esta sección si hay un objetivo seleccionado
-          ============================================ */}
+      {/*RENDERIZADO CONDICIONAL
+        Solo muestra esta sección si hay un objetivo seleccionado
+          */}
       {selectedGoal && (
         <>
           {/* Mensaje personalizado según el objetivo */}
@@ -163,9 +162,7 @@ const TrainingPreferences = ({ register, errors, watch }) => {
             </span>
           </div>
 
-          {/* ============================================
-              SECCIÓN: Tipos de Entrenamiento
-              ============================================ */}
+          {/* SECCIÓN: Tipos de Entrenamiento */}
           <div className="form-group">
             <label className="form-label">
               ¿Qué tipos de entrenamiento te interesan? (Selecciona uno o varios)
@@ -212,9 +209,7 @@ const TrainingPreferences = ({ register, errors, watch }) => {
         </>
       )}
 
-      {/* ============================================
-          SECCIÓN: Disponibilidad
-          ============================================ */}
+      {/* SECCIÓN: Disponibilidad */}
       <div className="form-row">
         {/* Campo: Días por semana */}
         <div className="form-group">
